@@ -1,5 +1,4 @@
 <?php
-
 /*
 *    _         _          __             _     
 *   /_\  _   _| |_ ___   / /  __ _ _ __ (_)___ 
@@ -13,10 +12,7 @@
 * the Free Software Foundation, either version 3 of the License, or
 * (at your option) any later version.
 */
-
-
 namespace AutoLapis;
-
 use pocketmine\item\Item;
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
@@ -25,9 +21,7 @@ use pocketmine\inventory\EnchantInventory;
 use pocketmine\event\player\PlayerDropItemEvent;
 use pocketmine\event\inventory\InventoryOpenEvent;
 use pocketmine\event\inventory\InventoryCloseEvent;
-
 class Main extends PluginBase implements Listener {
-
 	public function onEnable() {
 		$this->getLogger()->info(TF::AQUA.TF::BOLD."Enabled AutoLapis by Muqsit.");
 		$this->getLogger()->info(TF::AQUA.TF::BOLD."
@@ -41,16 +35,14 @@ class Main extends PluginBase implements Listener {
 		$this->saveDefaultConfig();
 		$this->reloadConfig();
 	}
-
 	public function onOpen(InventoryOpenEvent $event) {
 		$inventory = $event->getInventory();
 		$player = $event->getPlayer();
 		$count = $this->getConfig()->get("amount");
-		if ($player->hasPermission("auto.lapis")) {
+		if ($player->hasPermission("auto.lapis") && $inventory instanceof EnchantInventory) {
 			$inventory->setItem(1, Item::get(351, 4, $count)->setCustomName(TF::RESET.TF::AQUA."Lapis Lazuli"));
 		}
 	}
-
 	/* There are some server-based bugs. To overcome it... */
 	public function onDrop(PlayerDropItemEvent $event) {
 		$player = $event->getPlayer();
@@ -62,7 +54,6 @@ class Main extends PluginBase implements Listener {
 			}
 		}
 	}
-
 	public function onClose(InventoryCloseEvent $event) {
 		$inventory = $event->getInventory();
 		if ($inventory instanceof EnchantInventory) {
