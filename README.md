@@ -4,4 +4,4 @@
 Phar can be found here: https://github.com/Muqsit/AutoLapis/releases/download/v1/AutoLapis_v1.phar
 
 **Permissions:**
-- auto.lapis (defualt: true)
+- auto.lapis (default: true)
